@@ -1,0 +1,109 @@
+# ============================================================
+#  QUÊTES (communes à tout le serveur)
+#  Après modification : /biblio reload
+# ============================================================
+#
+# chapitres:
+#   <id>:
+#     nom: "Nom affiché"
+#     icone: MATERIAL
+#     debloque-par-defaut: true|false     # visible dès le départ
+#     necessite-quetes: [id_quete, ...]   # (optionnel) se débloque tout seul quand ces quêtes sont faites
+#
+# quetes:
+#   <id>:
+#     chapitre: <id du chapitre>
+#     nom: "Nom"
+#     description: ["ligne 1", "ligne 2"]
+#     icone: MATERIAL
+#     prerequis: [id_quete, ...]          # quêtes à avoir accomplies avant
+#     permission: "mon.permission"        # permission LuckPerms requise pour valider ("" = aucune)
+#     livraison: ["DIAMOND:5", ...]       # objets vanilla retirés à la validation ("ei:<id>:<n>" accepté aussi)
+#     tuer: ["ZOMBIE:10", "SKELETON:5"]   # mobs à tuer (progression COMMUNE, compte dès que la quête est débloquée)
+#     objets-speciaux: ["ei:MonItem:1"]   # ExecutableItems : "ei:<id ExecutableItems>:<quantité>" (/biblio objet ei pour voir l'id)
+#                                         # ou un objet enregistré avec /biblio objet creer <id> : "<id>:<quantité>"
+#     validation-auto: false              # true = validée toute seule au dernier kill (si pas de livraison/objets)
+#     recompenses:
+#       affichage: ["texte affiché", ...] # purement visuel (dans l'infobulle)
+#       commandes: ["give %player% bread 8", ...]          # exécutées par la console, %player% = celui qui valide
+#       permissions: ["mon.permission.reward"]             # donnée via LuckPerms au joueur qui valide
+#       debloque-chapitres: [id_chapitre, ...]             # débloqués pour TOUT LE MONDE
+
+chapitres:
+  chapitre1:
+    nom: "<gold>Chapitre I - L'Éveil"
+    icone: OAK_SAPLING
+    debloque-par-defaut: true
+  chapitre2:
+    nom: "<red>Chapitre II - Les Profondeurs"
+    icone: DEEPSLATE
+    debloque-par-defaut: false
+
+quetes:
+  premiers_pas:
+    chapitre: chapitre1
+    nom: "Premiers pas"
+    description:
+      - "Rassemblez du bois pour bâtir"
+      - "le premier campement."
+    icone: OAK_LOG
+    prerequis: []
+    permission: ""
+    livraison: ["OAK_LOG:16"]
+    recompenses:
+      affichage: ["8 pains"]
+      commandes: ["give %player% bread 8"]
+
+  l_atelier:
+    chapitre: chapitre1
+    nom: "L'atelier"
+    description:
+      - "Fournissez de quoi équiper le village."
+    icone: CRAFTING_TABLE
+    prerequis: [premiers_pas]
+    livraison: ["IRON_INGOT:10", "COAL:10"]
+    recompenses:
+      affichage: ["Chapitre II débloqué pour tous", "Permission : exemple.atelier"]
+      permissions: ["exemple.atelier"]
+      debloque-chapitres: [chapitre2]
+
+  premiere_descente:
+    chapitre: chapitre2
+    nom: "La première descente"
+    description:
+      - "Rapportez des diamants des profondeurs."
+    icone: DIAMOND
+    prerequis: [l_atelier]
+    permission: ""
+    livraison: ["DIAMOND:5"]
+    recompenses:
+      affichage: ["1 pioche en diamant"]
+      commandes: ["give %player% diamond_pickaxe 1"]
+
+  chasse_aux_zombies:
+    chapitre: chapitre1
+    nom: "Chasse aux zombies"
+    description:
+      - "Les nuits sont dangereuses."
+      - "Tuez des zombies, tous ensemble !"
+    icone: ZOMBIE_HEAD
+    prerequis: [premiers_pas]
+    tuer: ["ZOMBIE:20"]
+    validation-auto: true
+    recompenses:
+      affichage: ["16 pains"]
+      commandes: ["give %player% bread 16"]
+
+  la_relique:
+    chapitre: chapitre2
+    nom: "La relique oubliée"
+    description:
+      - "Rapportez une trace d'une ancienne"
+      - "civilisation (ExecutableItems)."
+    icone: AMETHYST_SHARD
+    prerequis: [premiere_descente]
+    tuer: ["WARDEN:1"]
+    objets-speciaux: ["ei:Trace_civilisation:1"]
+    recompenses:
+      affichage: ["Les remerciements du village"]
+      commandes: ["give %player% emerald 32"]

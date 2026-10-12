@@ -1,0 +1,20 @@
+name: Bibliotheque
+version: '1.0.0'
+main: fr.bibliotheque.Bibliotheque
+api-version: '26.2'
+description: Bibliothèque commune (histoire, quêtes, règlement, réseaux) accessible via un pupitre.
+softdepend: [LuckPerms, SCore, ExecutableItems]
+
+commands:
+  bibliotheque:
+    description: Ouvre la bibliothèque / commandes d'administration
+    aliases: [biblio]
+    usage: /<command> [ouvrir|pupitre|reload|histoire|quetes]
+
+permissions:
+  bibliotheque.use:
+    description: Utiliser la bibliothèque
+    default: true
+  bibliotheque.admin:
+    description: Administrer la bibliothèque
+    default: op

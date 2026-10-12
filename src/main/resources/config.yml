@@ -1,0 +1,30 @@
+# Format du texte : MiniMessage (https://docs.advntr.dev/minimessage/format.html)
+# Exemple : <red>rouge</red>, <bold>gras</bold>, <newline> pour sauter une ligne.
+
+# Règlement : chaque élément de la liste = une page du livre.
+reglement:
+  titre: "Règlement"
+  pages:
+    - "<bold>Règlement du serveur</bold><newline><newline>1. Respectez tous les joueurs.<newline>2. Aucune triche ni exploit.<newline>3. Pas de pillage ni de grief."
+    - "4. Pas de spam ni de publicité.<newline>5. Les décisions du staff sont définitives.<newline><newline><italic>Bon jeu !</italic>"
+
+# Réseaux : maximum 9 liens.
+reseaux:
+  discord:
+    nom: "<#5865F2>Discord"
+    icone: PAPER
+    url: "https://discord.gg/exemple"
+  site:
+    nom: "<green>Site web"
+    icone: COMPASS
+    url: "https://exemple.fr"
+  youtube:
+    nom: "<red>YouTube"
+    icone: ENDER_EYE
+    url: "https://youtube.com/@exemple"
+
+# Scoreboard affiché à droite de l'écran : quête en cours, puis statistiques.
+# Chaque joueur peut le masquer avec /biblio scoreboard
+scoreboard:
+  actif: true
+  titre: "<gradient:gold:yellow><bold>MON SERVEUR</bold></gradient>"
